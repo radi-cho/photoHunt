@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Photo Hunt</string>
+    <string name="title_activity_level">LevelActivity</string>
+    <string name="loading_level">Loading...</string>
 </resources>

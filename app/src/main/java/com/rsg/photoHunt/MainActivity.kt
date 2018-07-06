@@ -1,6 +1,7 @@
 package com.rsg.photoHunt
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -28,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
         gridview.onItemClickListener =
                 AdapterView.OnItemClickListener { parent, v, position, id ->
+                    val intent = Intent(this, LevelActivity::class.java)
+                    val message: String = position.toString()
+                    intent.putExtra("STRING_I_NEED", message);
+                    startActivityForResult(intent, 1)
                     Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
                 }
     }
