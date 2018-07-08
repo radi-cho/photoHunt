@@ -7,9 +7,7 @@ import java.io.IOException
 import java.nio.charset.StandardCharsets
 import org.json.JSONObject
 
-
 class LevelActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level)
@@ -32,12 +30,12 @@ class LevelActivity : AppCompatActivity() {
                 .getJSONObject(incomingLevelId)
                 .getString("item")
 
-        val levelCount: TextView = findViewById(R.id.levelCount) as TextView
+        val levelCount: TextView = findViewById(R.id.levelCount)
         levelCount.text = levelItem
     }
 
-    fun loadJSONFromAsset(): String {
-        var json: String? = null
+    private fun loadJSONFromAsset(): String {
+        val json: String?
         try {
             val `is` =
                     assets.open("levels.json")

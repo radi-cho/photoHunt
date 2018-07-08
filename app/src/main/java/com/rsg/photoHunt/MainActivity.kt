@@ -21,17 +21,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Customize the title
-        title = "Pick a level";
+        title = "Pick a level"
 
         // Initialize GridView
         val gridview: GridView = findViewById(R.id.gridview)
         gridview.adapter = ImageAdapter(this)
 
         gridview.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, v, position, id ->
+                AdapterView.OnItemClickListener { _, _, position, _ ->
                     val intent = Intent(this, LevelActivity::class.java)
                     val message: String = position.toString()
-                    intent.putExtra("LEVEL", message);
+                    intent.putExtra("LEVEL", message)
                     startActivityForResult(intent, 1)
                     Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
                 }
@@ -39,10 +39,9 @@ class MainActivity : AppCompatActivity() {
 }
 
 // Add Int.dpToPx which converts dimensions to pixels for more responsive word
-fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt();
+fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-// TODO: Add/generate drawables for each level...
-private val mThumbIds = arrayOf<Int>(
+private val mThumbIds = arrayOf(
         R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
         R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
         R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
