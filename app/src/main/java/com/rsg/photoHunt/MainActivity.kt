@@ -11,7 +11,7 @@ import android.content.res.Resources
 import android.widget.Toast
 import android.widget.AdapterView
 import android.widget.GridView
-
+import levels.LoadJSONFromAsset
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,22 +41,9 @@ class MainActivity : AppCompatActivity() {
 // Add Int.dpToPx which converts dimensions to pixels for more responsive word
 fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-private val mThumbIds = arrayOf(
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_background, R.drawable.ic_launcher_background)
-
 class ImageAdapter(private val mContext: Context) : BaseAdapter() {
 
-    override fun getCount(): Int = mThumbIds.size
+    override fun getCount(): Int = LoadJSONFromAsset(mContext).getLevelsArray().length()
 
     override fun getItem(position: Int): Any? = null
 
@@ -64,6 +51,8 @@ class ImageAdapter(private val mContext: Context) : BaseAdapter() {
 
     // create a new ImageView for each item referenced by the Adapter
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val thumbnail = R.drawable.ic_launcher_background
+
         val imageView: ImageView
         if (convertView == null) {
             imageView = ImageView(mContext)
@@ -74,7 +63,7 @@ class ImageAdapter(private val mContext: Context) : BaseAdapter() {
             imageView = convertView as ImageView
         }
 
-        imageView.setImageResource(mThumbIds[position])
+        imageView.setImageResource(thumbnail)
         return imageView
     }
 }

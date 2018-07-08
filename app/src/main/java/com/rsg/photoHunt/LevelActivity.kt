@@ -3,9 +3,7 @@ package com.rsg.photoHunt
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
-import java.io.IOException
-import java.nio.charset.StandardCharsets
-import org.json.JSONObject
+import levels.LoadJSONFromAsset
 
 class LevelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +22,7 @@ class LevelActivity : AppCompatActivity() {
             incomingLevelId = (savedInstanceState.getSerializable("LEVEL") as String).toInt()
         }
 
-        val initialObject = JSONObject(loadJSONFromAsset())
-        val levels = initialObject.getJSONArray("levels")
+        val levels = LoadJSONFromAsset(this).getLevelsArray()
         val levelItem: String = levels
                 .getJSONObject(incomingLevelId)
                 .getString("item")
@@ -33,23 +30,4 @@ class LevelActivity : AppCompatActivity() {
         val levelCount: TextView = findViewById(R.id.levelCount)
         levelCount.text = levelItem
     }
-
-    private fun loadJSONFromAsset(): String {
-        val json: String?
-        try {
-            val `is` =
-                    assets.open("levels.json")
-            val size = `is`.available()
-            val buffer = ByteArray(size)
-            `is`.read(buffer)
-            `is`.close()
-            json = String(buffer, StandardCharsets.UTF_8)
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-            return ""
-        }
-
-        return json
-    }
-
 }
