@@ -9,9 +9,9 @@
         android:id="@+id/levelCount"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
         android:text="@string/loading_level"
-        android:textSize="65sp"/>
+        android:textSize="65sp" />
 
 </android.support.constraint.ConstraintLayout>

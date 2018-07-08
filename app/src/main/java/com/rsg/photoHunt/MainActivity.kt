@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 AdapterView.OnItemClickListener { parent, v, position, id ->
                     val intent = Intent(this, LevelActivity::class.java)
                     val message: String = position.toString()
-                    intent.putExtra("STRING_I_NEED", message);
+                    intent.putExtra("LEVEL", message);
                     startActivityForResult(intent, 1)
                     Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
                 }
@@ -68,7 +68,6 @@ class ImageAdapter(private val mContext: Context) : BaseAdapter() {
         val imageView: ImageView
         if (convertView == null) {
             imageView = ImageView(mContext)
-            // TODO: Improve the responsibility of the grid for very small and very big devices
             imageView.layoutParams = ViewGroup.LayoutParams(140.dpToPx(), 120.dpToPx())
             imageView.scaleType = ImageView.ScaleType.CENTER_CROP
             imageView.setPadding(5, 5, 5, 5)

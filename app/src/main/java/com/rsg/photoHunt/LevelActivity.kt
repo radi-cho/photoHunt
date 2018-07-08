@@ -3,8 +3,10 @@ package com.rsg.photoHunt
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
+import java.io.IOException
+import java.nio.charset.StandardCharsets
+import org.json.JSONObject
 
-import kotlinx.android.synthetic.main.activity_level.*
 
 class LevelActivity : AppCompatActivity() {
 
@@ -12,20 +14,44 @@ class LevelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level)
 
-        val newString: String?
+        val incomingLevelId: Int
         if (savedInstanceState == null) {
             val extras = intent.extras
             if (extras == null) {
-                newString = null
+                incomingLevelId = 1
             } else {
-                newString = extras.getString("STRING_I_NEED")
+                incomingLevelId = extras.getString("LEVEL").toInt()
             }
         } else {
-            newString = savedInstanceState.getSerializable("STRING_I_NEED") as String
+            incomingLevelId = (savedInstanceState.getSerializable("LEVEL") as String).toInt()
         }
 
+        val initialObject = JSONObject(loadJSONFromAsset())
+        val levels = initialObject.getJSONArray("levels")
+        val levelItem: String = levels
+                .getJSONObject(incomingLevelId)
+                .getString("item")
+
         val levelCount: TextView = findViewById(R.id.levelCount) as TextView
-        levelCount.text = newString
+        levelCount.text = levelItem
+    }
+
+    fun loadJSONFromAsset(): String {
+        var json: String? = null
+        try {
+            val `is` =
+                    assets.open("levels.json")
+            val size = `is`.available()
+            val buffer = ByteArray(size)
+            `is`.read(buffer)
+            `is`.close()
+            json = String(buffer, StandardCharsets.UTF_8)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return ""
+        }
+
+        return json
     }
 
 }
