@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import levels.LoadJSONFromAsset
+import com.google.firebase.analytics.FirebaseAnalytics
+
+
+private val mFirebaseAnalytics: FirebaseAnalytics? = null
 
 class LevelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,5 +33,7 @@ class LevelActivity : AppCompatActivity() {
 
         val levelCount: TextView = findViewById(R.id.levelCount)
         levelCount.text = levelItem
+
+        mFirebaseAnalytics?.logEvent("load_level_$incomingLevelId", null)
     }
 }

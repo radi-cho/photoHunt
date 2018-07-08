@@ -1,6 +1,7 @@
 package levels
 
 import android.content.Context
+import com.crashlytics.android.Crashlytics
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
@@ -10,14 +11,14 @@ class LoadJSONFromAsset(private val context: Context) {
     fun loadJSONFromAsset(): String {
         val json: String?
         try {
-            val `is` = context.assets.open("levels.json")
-            val size = `is`.available()
+            val asset = context.assets.open("levels.json")
+            val size = asset.available()
             val buffer = ByteArray(size)
-            `is`.read(buffer)
-            `is`.close()
+            asset.read(buffer)
+            asset.close()
             json = String(buffer, StandardCharsets.UTF_8)
-        } catch (ex: IOException) {
-            ex.printStackTrace()
+        } catch (e: IOException) {
+            Crashlytics.logException(e)
             return ""
         }
 
