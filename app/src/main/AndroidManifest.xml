@@ -19,6 +19,10 @@
         <activity
             android:name=".LevelActivity"
             android:label="@string/title_activity_level"></activity>
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="label" />
     </application>
 
 </manifest>
