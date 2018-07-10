@@ -3,10 +3,16 @@ package com.rsg.photoHunt
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
-import levels.LoadJSONFromAsset
+import com.rsg.photoHunt.levels.LoadJSONFromAsset
+import com.rsg.photoHunt.imageProcessing.Util
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class LevelActivity : AppCompatActivity() {
+    fun setTextView (str: String) {
+        val levelInfo: TextView = findViewById(R.id.levelCount)
+        levelInfo.text = str
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level)
@@ -30,8 +36,7 @@ class LevelActivity : AppCompatActivity() {
                 .getJSONObject(incomingLevelId)
                 .getString("item")
 
-        val levelCount: TextView = findViewById(R.id.levelCount)
-        levelCount.text = levelItem
+        Util(this).labelImage(::setTextView)
 
         mFirebaseAnalytics.logEvent("load_level", null)
         mFirebaseAnalytics.logEvent("load_level_${incomingLevelId + 1}", null)

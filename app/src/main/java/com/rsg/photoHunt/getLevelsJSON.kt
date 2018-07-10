@@ -1,4 +1,4 @@
-package levels
+package com.rsg.photoHunt.levels
 
 import android.content.Context
 import com.crashlytics.android.Crashlytics

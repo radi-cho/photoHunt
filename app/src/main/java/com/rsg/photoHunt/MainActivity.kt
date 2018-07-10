@@ -11,7 +11,7 @@ import android.content.res.Resources
 import android.widget.Toast
 import android.widget.AdapterView
 import android.widget.GridView
-import levels.LoadJSONFromAsset
+import com.rsg.photoHunt.levels.LoadJSONFromAsset
 
 class MainActivity : AppCompatActivity() {
 
