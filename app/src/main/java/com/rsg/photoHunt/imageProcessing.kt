@@ -3,11 +3,11 @@ package com.rsg.photoHunt.imageProcessing
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import com.crashlytics.android.Crashlytics
 import java.io.InputStream
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.android.gms.tasks.OnFailureListener
-import java.util.logging.Logger
 
 
 class Util(private val context: Context) {
@@ -37,8 +37,7 @@ class Util(private val context: Context) {
                 .addOnFailureListener(
                         object : OnFailureListener {
                             override fun onFailure(e: Exception) {
-                                // Task failed with an exception
-                                // ...
+                                Crashlytics.logException(e)
                             }
                         })
     }
